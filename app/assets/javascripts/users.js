@@ -16,7 +16,27 @@ var ready = function () {
             chatBox.chatWith(data.conversation_id);
         });
     });
+    
+    /*
+    * Send request to users
+    *
+    */
+    
+   $('.send-request').on('click',function(event) {
+                
+                event.preventDefault();
+                var id = $(this).data('cid');
+                var sender_id = $(this).data('sid');
+                var recipient_id = $(this).data('rip');
+                sender_name = $("#user_name").val();
+                $.post("/conversations", { sender_id: sender_id, recipient_id: recipient_id }, function (data) {
+                    chatBox.chatWith(data.conversation_id);
+                    chatBox.sendRequest($('.chatboxtextarea'), data.conversation_id,sender_name);
+                });
+                
+                
 
+        });
     /**
      * Used to minimize the chatbox
      */

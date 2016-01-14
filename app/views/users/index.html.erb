@@ -23,6 +23,8 @@
                 <td>
                   <%= link_to "Send Message", "#", class: "btn btn-success btn-xs start-conversation",
                               "data-sid" => current_user.id, "data-rip" => user.id %>
+                  <%= link_to "Send Request", "#", class: "btn btn-warning btn-xs send-request",
+                              "data-sid" => current_user.id, "data-rip" => user.id %>
                 </td>
               </tr>
           <% end %>

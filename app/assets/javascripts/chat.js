@@ -169,7 +169,7 @@ var ready = function () {
          * @param conversation_id
          */
 
-        checkInputKey: function (event, chatboxtextarea, conversation_id) {
+        checkInputKey: function (event,chatboxtextarea, conversation_id) {
             if (event.keyCode == 13 && event.shiftKey == 0) {
                 event.preventDefault();
 
@@ -198,7 +198,44 @@ var ready = function () {
             }
 
         },
+        
+        
+        sendRequest: function (chatboxtextarea, conversation_id,sender_name) {
+            
+            var message = 'You have a new request from '+sender_name;
+            //message = message.replace(/^\s+|\s+$/g, "");
+            chatboxtextarea = '#conversation_form_' + conversation_id + ' .chatboxtextarea';
+            $('#conversation_form_' + conversation_id +' .chatboxtextarea').val('You have a new request from '+sender_name);
+            console.log(conversation_id);
+            $('#conversation_form_' + conversation_id).submit();
+            console.log('submitted');
+            $(chatboxtextarea).focus();
+            $(chatboxtextarea).css('height', '44px');
+            setTimeout(function(){
+                 
+                $(chatboxtextarea).val('');
+                 
+ 
+            },500)
+           
 
+            var adjustedHeight = chatboxtextarea.clientHeight;
+            var maxHeight = 94;
+
+            if (maxHeight > adjustedHeight) {
+                adjustedHeight = Math.max(chatboxtextarea.scrollHeight, adjustedHeight);
+                if (maxHeight)
+                    adjustedHeight = Math.min(maxHeight, adjustedHeight);
+                if (adjustedHeight > chatboxtextarea.clientHeight)
+                    $(chatboxtextarea).css('height', adjustedHeight + 8 + 'px');
+            } else {
+                $(chatboxtextarea).css('overflow', 'auto');
+            }
+
+        },
+        
+        
+        
         /**
          * Responsible for handling the growth of chatboxes as they increase on the page
          * Keeps track of the minimized chatboxes etc
